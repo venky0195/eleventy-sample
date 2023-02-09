@@ -1,6 +1,6 @@
 
 exports.handler = (event, context, callback) => {
-console.log("Hello from /hello serverless fn");
+console.log("Hello from /hello serverless fn " + Date.now());
   const response = {
     statusCode: 200,
     headers: {
