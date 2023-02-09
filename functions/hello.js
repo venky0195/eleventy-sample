@@ -1,13 +1,15 @@
+export default function handler(req, res) {
 
-exports.handler = (event, context, callback) => {
-console.log("Hello from /hello serverless fn " + Date.now());
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Cache-Control': 'no-cache' // Disable caching of this response
-    },
-    body: ''
+  console.log("from cloudfunction " + Date.now());
+  if (req.method === "GET") {
+    res
+      .status(200)
+      .json({ method: "GET", route: "id", params: req.params })
   }
 
-  return callback(null, response)
+  if (req.method === "POST") {
+    res
+      .status(200)
+      .json({ method: "POST", route: "id", params: req.params })
+  }
 }
