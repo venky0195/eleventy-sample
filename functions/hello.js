@@ -1,15 +1,13 @@
 export default function handler(req, res) {
 
-  console.log("from cloudfunction " + Date.now());
+
   if (req.method === "GET") {
+      console.log("Hello from eleventy website");
     res
       .status(200)
       .json({ method: "GET", route: "id", params: req.params })
   }
+  
+        console.log("call not supported");
 
-  if (req.method === "POST") {
-    res
-      .status(200)
-      .json({ method: "POST", route: "id", params: req.params })
-  }
 }
