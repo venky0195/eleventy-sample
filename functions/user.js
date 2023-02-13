@@ -1,13 +1,11 @@
+export default function handler(req, res) {
 
-exports.handler = (event, context, callback) => {
-console.log("Hello from /user serverless fn");
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Cache-Control': 'no-cache' // Disable caching of this response
-    },
-    body: 'This is a user'
+
+  if (req.method === "GET") {
+      console.log("processing user");
+    res
+      .status(200)
+      .json({ method: "GET", route: "id", params: req.params })
   }
-
-  return callback(null, response)
+  console.log("non GET call");
 }
