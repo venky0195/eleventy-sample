@@ -1,7 +1,7 @@
-import { helper } from "./helper";
+import { helper, getCurrentTime } from "./helper";
 
 export default function handler(req, res) {
-  console.log("Console log from function hello!!");
+  console.log("Current time: ",getCurrentTime());
 
   res
       .status(200)
