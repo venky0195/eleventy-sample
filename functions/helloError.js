@@ -1,7 +1,7 @@
 import { helper } from "./helper";
 
 export default function handler(req, res) {
-  console.log("Current time: ",throwErrorExample());
+  console.log("In handler of helloError: ",throwErrorExample());
 
   res
       .status(200)
