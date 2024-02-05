@@ -17,5 +17,10 @@ export default function handler(req, res) {
   }
 
   function throwErrorExample() {
-    throw new Error('This is a custom runtime error!');
+  // Add some console logs before throwing the error
+  console.log('Before throwing error in throwErrorExample function');
+  console.debug('Additional information or debugging logs...');
+  
+  // This line will throw a runtime error
+  throw new Error('Simulating a runtime error in throwErrorExample function');
 }
