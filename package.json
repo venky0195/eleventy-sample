@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "packageManager": "yarn@latest",
+  "packageManager": "yarn@4.5.0",
   "keywords": [],
   "author": "",
   "license": "ISC",
