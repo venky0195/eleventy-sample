@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@contentstack/auth-sdk": "^1.0.25"
+    "@contentstack/venus-components": "github:contentstack/venus-components#VE-2044"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.2"
