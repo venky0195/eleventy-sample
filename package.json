@@ -13,6 +13,6 @@
     "@11ty/eleventy": "^1.0.2"
   },
   "dependencies": {
-    "@contentstack/auth-sdk": "git+https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/contentstack/auth-sdk.git"
+    "@contentstack/auth-sdk": "git+https://${GITHUB_PAT}@github.com/contentstack/auth-sdk.git"
   }
 }
