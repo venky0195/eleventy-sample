@@ -14,14 +14,29 @@ export default async function handler(request, context) {
         contentType.includes(type)
     );
 
+    const newHeaders = new Headers(response.headers);
+
     if (shouldCompress) {
-        const newHeaders = new Headers(response.headers);
-
-        // Remove content-encoding if already present
         newHeaders.delete("Content-Encoding");
-
-        // Ensure CDN can vary based on encoding support
         newHeaders.set("Vary", "Accept-Encoding");
+
+        if (
+            contentType.includes("text/html") &&
+            !newHeaders.get("Cache-Control")?.includes("s-maxage")
+        ) {
+            newHeaders.set(
+                "Cache-Control",
+                "public, s-maxage=86400, stale-while-revalidate=2592000"
+            );
+        }
+
+        // Log to console (visible in Launch logs tab)
+        console.log("Edge Function Compression Debug:", {
+            url: request.url,
+            contentType,
+            acceptEncoding: request.headers.get("accept-encoding"),
+            cacheControl: newHeaders.get("Cache-Control")
+        });
 
         return new Response(response.body, {
             status: response.status,
