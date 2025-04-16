@@ -20,11 +20,11 @@ export default async function handler(request, context) {
         // newHeaders.delete("Content-Length");
         // newHeaders.delete("Content-MD5");
         // newHeaders.delete("Last-Modified");
-        // // newHeaders.delete("Accept-Ranges");
-        newHeaders.delete("Access-Control-Expose-Headers");
-        // newHeaders.delete("X-Ms-Request-Id");
-        // newHeaders.delete("X-Ms-Version");
-        // newHeaders.delete("X-Envoy-Upstream-Service-Time");
+        // newHeaders.delete("Access-Control-Expose-Headers");
+        newHeaders.delete("access-control-allow-origin");
+        newHeaders.delete("X-Ms-Request-Id");
+        newHeaders.delete("X-Ms-Version");
+        newHeaders.delete("X-Envoy-Upstream-Service-Time");
 
         console.log("🔧 Compressible response detected:", {
             url: request.url,
