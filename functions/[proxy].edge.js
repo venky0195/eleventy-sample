@@ -1,5 +1,3 @@
-import etag from "etag";
-
 export default async function handler(request, context) {
     const response = await fetch(request);
 
@@ -19,8 +17,18 @@ export default async function handler(request, context) {
     const newHeaders = new Headers(response.headers);
 
     if (isCompressible) {
-        //create etag and set header here
-        newHeaders.set("ETag", createETag(response.body));
+        const bodyBuffer = await response.arrayBuffer();
+        const bodyUint8 = new Uint8Array(bodyBuffer);
+
+        // Compute SHA-1 hash
+        const hashBuffer = await crypto.subtle.digest("SHA-1", bodyBuffer);
+        const hashHex = Array.from(new Uint8Array(hashBuffer))
+            .map(b => b.toString(16).padStart(2, "0"))
+            .join("");
+
+        const weakETag = `W/"${bodyUint8.length.toString(16)}-${hashHex}"`;
+
+        newHeaders.set("ETag", weakETag);
     }
 
     return new Response(response.body, {
@@ -29,8 +37,3 @@ export default async function handler(request, context) {
         headers: newHeaders,
     });
 }
-
-function createETag(body, encoding = "utf8") {
-    const buf = !Buffer.isBuffer(body) ? Buffer.from(body, encoding) : body;
-    return etag(buf, { weak: true });
-  }
