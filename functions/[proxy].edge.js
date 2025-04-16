@@ -17,8 +17,8 @@ export default async function handler(request, context) {
     const newHeaders = new Headers(response.headers);
 
     if (isCompressible) {
-        newHeaders.delete("Content-Length");
-        // newHeaders.delete("Content-MD5");
+        // newHeaders.delete("Content-Length");
+        newHeaders.delete("Content-MD5");
         // newHeaders.delete("Last-Modified");
         // newHeaders.delete("Accept-Ranges");
         // newHeaders.delete("Access-Control-Expose-Headers");
