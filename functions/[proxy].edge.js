@@ -19,6 +19,8 @@ export default async function handler(request, context) {
     if (isCompressible) {
       newHeaders.delete("access-control-expose-headers");    // Let Cloudflare recompress
       newHeaders.delete("content-md5");      // Prevent fixed-size bypass
+        newHeaders.delete("content-length");   // Prevent fixed-size bypass
+        newHeaders.delete("etag"); // Prevent fixed-size bypass
   
       // Optional: reinforce cache policy
       if (!newHeaders.has("Cache-Control")) {
