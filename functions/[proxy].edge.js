@@ -18,8 +18,8 @@ export default async function handler(request, context) {
 
     if (isCompressible) {
         // newHeaders.delete("Content-Length");
-        newHeaders.delete("Content-MD5");
-        // newHeaders.delete("Last-Modified");
+        // newHeaders.delete("Content-MD5");
+        newHeaders.delete("Last-Modified");
         // newHeaders.delete("Accept-Ranges");
         // newHeaders.delete("Access-Control-Expose-Headers");
         // newHeaders.delete("X-Ms-Request-Id");
