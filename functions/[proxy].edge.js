@@ -17,14 +17,14 @@ export default async function handler(request, context) {
     const newHeaders = new Headers(response.headers);
 
     if (isCompressible) {
-        newHeaders.delete("content-md5");
-        newHeaders.delete("Last-Modified");
-        newHeaders.delete("Access-Control-Expose-Headers");
-        newHeaders.delete("access-control-allow-origin");
-        newHeaders.delete("X-Ms-Request-Id");
-        newHeaders.delete("X-Ms-Version");
-        newHeaders.delete("X-Envoy-Upstream-Service-Time");
-
+        // newHeaders.delete("content-md5");
+        // newHeaders.delete("Last-Modified");
+        // newHeaders.delete("Access-Control-Expose-Headers");
+        // newHeaders.delete("access-control-allow-origin");
+        // newHeaders.delete("X-Ms-Request-Id");
+        // newHeaders.delete("X-Ms-Version");
+        // newHeaders.delete("X-Envoy-Upstream-Service-Time");
+        newHeaders.delete("etag");
         console.log("🔧 Compressible response detected:", {
             url: request.url,
             contentType,
