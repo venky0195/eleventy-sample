@@ -17,9 +17,8 @@ export default async function handler(request, context) {
     const newHeaders = new Headers(response.headers);
   
     if (isCompressible) {
-      newHeaders.delete("Content-Encoding");    // Let Cloudflare recompress
-      newHeaders.delete("Content-Length");      // Prevent fixed-size bypass
-      newHeaders.set("Vary", "Accept-Encoding");
+      newHeaders.delete("access-control-expose-headers");    // Let Cloudflare recompress
+      newHeaders.delete("content-md5");      // Prevent fixed-size bypass
   
       // Optional: reinforce cache policy
       if (!newHeaders.has("Cache-Control")) {
