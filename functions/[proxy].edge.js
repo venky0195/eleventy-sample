@@ -1,3 +1,5 @@
+import etag from "etag";
+
 export default async function handler(request, context) {
     const response = await fetch(request);
 
@@ -29,7 +31,6 @@ export default async function handler(request, context) {
 }
 
 function createETag(body, encoding = "utf8") {
-    const etag = require("etag");
     const buf = !Buffer.isBuffer(body) ? Buffer.from(body, encoding) : body;
     return etag(buf, { weak: true });
   }
