@@ -24,7 +24,8 @@ export default async function handler(request, context) {
         // newHeaders.delete("X-Ms-Request-Id");
         // newHeaders.delete("X-Ms-Version");
         // newHeaders.delete("X-Envoy-Upstream-Service-Time");
-        newHeaders.delete("etag");
+        // newHeaders.delete("etag");
+        newHeaders.set("etag", "0x8DD7CC777E51F4F");
         console.log("🔧 Compressible response detected:", {
             url: request.url,
             contentType,
