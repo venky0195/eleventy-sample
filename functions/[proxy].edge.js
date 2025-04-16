@@ -17,7 +17,7 @@ export default async function handler(request, context) {
     const newHeaders = new Headers(response.headers);
   
     if (isCompressible) {
-        newHeaders.delete("etag"); // Prevent fixed-size bypass
+        // newHeaders.delete("etag"); // Prevent fixed-size bypass
   
       // Optional: reinforce cache policy
       if (!newHeaders.has("Cache-Control")) {
