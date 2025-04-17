@@ -1,7 +1,7 @@
 export default async function handler(request, context) {
     const response = await fetch(request);
-    const contentType = response.headers.get("Content-Type") || "";
 
+    const contentType = response.headers.get("Content-Type") || "";
     const compressibleTypes = [
         "text/html",
         "text/css",
@@ -14,18 +14,18 @@ export default async function handler(request, context) {
         contentType.includes(type)
     );
 
-    if (!isCompressible) return response;
+    const newHeaders = new Headers(response.headers);
 
-    const headers = new Headers(response.headers);
-
-    const etag = headers.get("ETag");
-    if (etag && !etag.startsWith("W/")) {
-        headers.set("ETag", `W/${etag}`);
+    if (isCompressible) {
+        const etag = headers.get("ETag");
+        if (etag && !etag.startsWith("W/")) {
+            headers.set("ETag", `W/${etag}`);
+        }
     }
 
-    return new Response(bodyBuffer, {
+    return new Response(response.body, {
         status: response.status,
         statusText: response.statusText,
-        headers,
+        headers: newHeaders,
     });
 }
