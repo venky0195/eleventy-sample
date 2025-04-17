@@ -1,7 +1,7 @@
 export default async function handler(request, context) {
     const response = await fetch(request);
-
     const contentType = response.headers.get("Content-Type") || "";
+
     const compressibleTypes = [
         "text/html",
         "text/css",
@@ -14,20 +14,24 @@ export default async function handler(request, context) {
         contentType.includes(type)
     );
 
-    const newHeaders = new Headers(response.headers);
+    if (!isCompressible) return response;
 
-    if (isCompressible) {
+    const headers = new Headers(response.headers);
+    // Read body into buffer
+    const bodyBuffer = await response.arrayBuffer();
 
-        newHeaders.delete("Content-MD5");
-        newHeaders.delete("Last-Modified");
+    // Generate a weak ETag using SHA-1 of body
+    const hashBuffer = await crypto.subtle.digest("SHA-1", bodyBuffer);
+    const hashHex = Array.from(new Uint8Array(hashBuffer))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
 
-        // Ensure Vary is present
-        newHeaders.set("Vary", "Accept-Encoding");
-    }
+    const weakETag = `W/"${hashHex}"`;
+    headers.set("ETag", weakETag);
 
-    return new Response(response.body, {
+    return new Response(bodyBuffer, {
         status: response.status,
         statusText: response.statusText,
-        headers: newHeaders,
+        headers,
     });
 }
