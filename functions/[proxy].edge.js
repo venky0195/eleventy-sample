@@ -17,9 +17,9 @@ export default async function handler(request, context) {
     const newHeaders = new Headers(response.headers);
 
     if (isCompressible) {
-        const etag = headers.get("ETag");
+        const etag = newHeaders.get("ETag");
         if (etag && !etag.startsWith("W/")) {
-            headers.set("ETag", `W/${etag}`);
+            newHeaders.set("ETag", `W/${etag}`);
         }
     }
 
