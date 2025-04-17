@@ -17,17 +17,11 @@ export default async function handler(request, context) {
     if (!isCompressible) return response;
 
     const headers = new Headers(response.headers);
-    // Read body into buffer
-    const bodyBuffer = await response.arrayBuffer();
 
-    // Generate a weak ETag using SHA-1 of body
-    const hashBuffer = await crypto.subtle.digest("SHA-1", bodyBuffer);
-    const hashHex = Array.from(new Uint8Array(hashBuffer))
-        .map(b => b.toString(16).padStart(2, "0"))
-        .join("");
-
-    const weakETag = `W/"${hashHex}"`;
-    headers.set("ETag", weakETag);
+    const etag = headers.get("ETag");
+    if (etag && !etag.startsWith("W/")) {
+        headers.set("ETag", `W/${etag}`);
+    }
 
     return new Response(bodyBuffer, {
         status: response.status,
