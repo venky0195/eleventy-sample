@@ -17,7 +17,8 @@ export default async function handler(request, context) {
     const newHeaders = new Headers(response.headers);
 
     if (isCompressible) {
-        newHeaders.delete("etag");
+
+        newHeaders.set("Vary", "Accept-Encoding");
     }
 
     return new Response(response.body, {
