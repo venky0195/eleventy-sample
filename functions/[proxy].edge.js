@@ -18,6 +18,10 @@ export default async function handler(request, context) {
 
     if (isCompressible) {
 
+        newHeaders.delete("Content-MD5");
+        newHeaders.delete("Last-Modified");
+
+        // Ensure Vary is present
         newHeaders.set("Vary", "Accept-Encoding");
     }
 
