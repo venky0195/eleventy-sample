@@ -1,8 +1,8 @@
 {
-    "redirects": {
+    "redirects": [{
         "source": "/",
         "destination": "/redirected"
-    },
+    }],
     "cache": {
       "cachePriming": {
         "urls": [
