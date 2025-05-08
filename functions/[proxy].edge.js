@@ -1,6 +1,6 @@
 export default async function handler(request, context) {
     const response = await fetch(request);
-
+    console.log("🙋🏻 from edge fn")
     const contentType = response.headers.get("Content-Type") || "";
     const compressibleTypes = [
         "text/html",
