@@ -1,15 +1,6 @@
 {
-    "redirects": [{
+    "rewrites": [{
         "source": "/",
-        "destination": "/redirected"
-    }],
-    "cache": {
-      "cachePriming": {
-        "urls": [
-          "/delay",
-          "/blog.html",
-          "/new-page.html"
-        ]
-      }
-    }
+        "destination": "https://static-site-demo-topaz.vercel.app"
+    }]
   }
