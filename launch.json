@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/KZuNsktceI1qsVi",
+      "source": "/test",
       "destination": "/8GOvRLwPV8mQ8Zo",
       "request": {
         "headers": {
