@@ -1,26 +1,17 @@
 export default async function handler(request, context) {
+    //print the request headers loop through the headers and print the key and value
+    for (const [key, value] of request.headers.entries()) {
+        console.log("Request Headers")
+        console.log(`${key}: ${value}`);
+    }
+
     const response = await fetch(request);
     console.log("🙋🏻 from edge fn")
-    const contentType = response.headers.get("Content-Type") || "";
-    const compressibleTypes = [
-        "text/html",
-        "text/css",
-        "application/javascript",
-        "application/json",
-        "image/svg+xml"
-    ];
-
-    const isCompressible = compressibleTypes.some(type =>
-        contentType.includes(type)
-    );
-
-    const newHeaders = new Headers(response.headers);
-
-    if (isCompressible) {
-        const etag = newHeaders.get("ETag");
-        if (etag && !etag.startsWith("W/")) {
-            newHeaders.set("ETag", `W/${etag}`);
-        }
+   
+    //print the response headers loop through the headers and print the key and value
+    for (const [key, value] of response.headers.entries()) {
+        console.log("Response Headers")
+        console.log(`${key}: ${value}`);
     }
 
     return new Response(response.body, {
