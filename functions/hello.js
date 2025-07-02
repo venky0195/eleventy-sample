@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-    let requestHeaders = Object.fromEntries(request.headers);
+    let requestHeaders = Object.fromEntries(req.headers);
         console.log("req headers from cloud fn-->", requestHeaders)
 
   
